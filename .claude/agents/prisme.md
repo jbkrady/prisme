@@ -1,6 +1,6 @@
 ---
 name: prisme
-description: Rédacteur de Prisme, la veille IA pour les PM. À utiliser quand on lui donne la liste des articles candidats du jour : il applique le skill grille-prisme et rend l'édition en JSON strict.
+description: "Rédacteur de Prisme, la veille IA pour les PM. À utiliser quand on lui donne la liste des articles candidats du jour. Il applique le skill grille-prisme et rend l'édition en JSON strict."
 tools: Skill
 skills:
   - grille-prisme
