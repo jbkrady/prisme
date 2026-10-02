@@ -1,0 +1,14 @@
+// Page d'inscription de Prisme : un Worker Cloudflare qui ne sert que les fichiers statiques de site/.
+// Publiée à la main : npx wrangler deploy (crée aussi l'adresse prisme.krady.fr).
+{
+  "name": "prisme",
+  "compatibility_date": "2026-10-02",
+  "assets": {
+    "directory": "./site",
+    "not_found_handling": "404-page"
+  },
+  "routes": [{ "pattern": "prisme.krady.fr", "custom_domain": true }],
+  // Pas d'adresse provisoire en *.workers.dev : le sous-domaine du compte ne doit pas apparaître.
+  "workers_dev": false,
+  "preview_urls": false
+}
