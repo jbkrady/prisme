@@ -8,21 +8,16 @@
 <meta property="og:title" content="Prisme · L’essentiel de l’IA pour les PM">
 <meta property="og:description" content="Chaque matin à 8 h 30, 5 nouveautés IA au plus, et ce qu’elles changent pour un PM. En 2 minutes.">
 <meta property="og:image" content="https://prisme.krady.fr/exemple-mail.png">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 3 29 27H3z' fill='%23b4533f'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="img/tri-lit.png">
+<link rel="stylesheet" href="prisme.css">
 <style>
-  /* Design « 2A · Wash » du projet Claude Design « Lancer la routine », adapté à Prisme :
-     même mise en page et même typographie, dégradé recoloré du terracotta du mail vers le rose. */
+  /* Design v2 « Holo » — mascotte Tri. Jetons dans prisme.css. */
   :root {
-    --ink: oklch(0.15 0.002 90);
-    --ink-soft: oklch(0.32 0.004 90);
-    --muted: oklch(0.48 0.002 90);
-    --faint: oklch(0.56 0.002 90);
-    --paper: oklch(0.985 0.001 90);
-    --card: oklch(0.99 0.001 90);
-    --line: oklch(0.89 0.002 90);
-    --line-soft: oklch(0.92 0.002 90);
-    --terra: #b4533f;
-    --err: oklch(0.45 0.16 28);
+    --ink-soft: #33395c;
+    --err: #a8261b;
+    --err-line: #e8b4ad;
+    --verre: rgba(255,255,255,0.82);
+    --verre-bord: rgba(255,255,255,0.95);
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
@@ -31,268 +26,259 @@
     color: var(--ink);
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
   a { color: inherit; }
+  img { display: block; }
   input, button { font: inherit; }
-  :focus-visible { outline: 3px solid var(--terra); outline-offset: 3px; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+  .sr { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
-  .wash {
-    background: linear-gradient(180deg,
-      oklch(0.6 0.14 38) 0%,
-      oklch(0.72 0.16 15) 26%,
-      oklch(0.9 0.07 15) 50%,
-      oklch(0.96 0.02 25) 64%,
-      var(--paper) 76%);
-    padding: 26px 40px 56px;
-  }
-  .top {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    margin-bottom: 46px;
-  }
-  .brand { font-weight: 700; font-size: 17px; letter-spacing: 0.24em; text-transform: uppercase; }
-  .gh {
-    justify-self: end;
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    min-height: 44px;
-    color: var(--ink);
-    text-decoration: none;
-    font-size: 13.5px;
-    font-weight: 600;
-  }
-  .gh:hover { text-decoration: underline; text-underline-offset: 4px; }
-
-  h1 {
-    margin: 0 auto 26px;
-    max-width: 1000px;
-    text-align: center;
-    font-size: clamp(52px, 9vw, 104px);
-    line-height: 0.9;
-    letter-spacing: -0.045em;
-    font-weight: 700;
-    animation: monte 0.9s cubic-bezier(.2,.7,.1,1) both;
-  }
-  .nw { white-space: nowrap; }
-  .sous {
-    margin: 0 auto 44px;
-    max-width: 640px;
-    text-align: center;
-    font-size: 20px;
-    line-height: 1.4;
-    font-weight: 500;
-    color: var(--ink-soft);
-    text-wrap: pretty;
-  }
-  @keyframes monte { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: none; } }
-  @keyframes pouls { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+  @keyframes flotte { 0%,100% { transform: translate(-50%,-50%); } 50% { transform: translate(-50%, calc(-50% - 8px)); } }
+  @keyframes carte { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+  @keyframes respire { 0%,100% { opacity: .75; } 50% { opacity: 1; } }
   @keyframes leve { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-  @media (prefers-reduced-motion: reduce) { h1, .etat { animation: none !important; } }
+  @keyframes monte { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; } }
+
+  /* Héros */
+  .heros {
+    position: relative; overflow: hidden; isolation: isolate;
+    background:
+      radial-gradient(55% 60% at 88% 20%, #bfe0ff 0%, rgba(191,224,255,0) 70%),
+      radial-gradient(45% 55% at 0% 95%, #dcd5ff 0%, rgba(220,213,255,0) 70%),
+      radial-gradient(40% 40% at 45% 0%, #d6f6ff 0%, rgba(214,246,255,0) 70%),
+      linear-gradient(180deg, #e6efff 0%, var(--paper) 100%);
+    padding: 16px 40px 64px;
+  }
+  .top { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .marque { display: inline-flex; align-items: center; gap: 9px; font-weight: 700; font-size: 17px; letter-spacing: .2em; text-transform: uppercase; }
+  .gh {
+    display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 0 16px;
+    border-radius: 999px; white-space: nowrap; text-decoration: none; font-size: 13.5px; font-weight: 600;
+    background: rgba(255,255,255,0.6); border: 1px solid var(--verre-bord); color: var(--ink);
+    transition: background .15s ease;
+  }
+  .gh:hover { background: rgba(255,255,255,0.95); }
+
+  .grille { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; display: flex; flex-direction: row-reverse; align-items: center; gap: 8px 40px; }
+  .scene { position: relative; flex: 1 1 460px; min-width: 0; height: 560px; }
+  .texte { position: relative; z-index: 1; flex: 1 1 460px; min-width: 0; max-width: 600px; padding-top: 12px; }
+
+  .faisceau-halo, .faisceau {
+    position: absolute; left: -6%; right: 50%; top: 54%; border-radius: 999px;
+  }
+  .faisceau-halo { height: 56px; margin-top: -28px; background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.8) 60%, #fff); filter: blur(14px); }
+  .faisceau { height: 6px; margin-top: -3px; background: linear-gradient(90deg, rgba(255,255,255,0), #fff 45%, #fff); box-shadow: 0 0 18px 4px rgba(255,255,255,.9); }
+  .rayons { position: absolute; left: 52%; top: 54%; width: 130%; height: 0; }
+  .rayons span {
+    position: absolute; left: 0; top: -14px; width: 100%; height: 28px; border-radius: 999px;
+    transform-origin: 0 50%; filter: blur(7px); animation: respire 5s ease-in-out infinite;
+  }
+  .rayons span:nth-child(1) { transform: rotate(-20deg); background: linear-gradient(90deg, var(--ray-1), rgba(255,255,255,0) 80%); }
+  .rayons span:nth-child(2) { transform: rotate(-10deg); background: linear-gradient(90deg, var(--ray-2), rgba(255,255,255,0) 80%); animation-delay: .4s; }
+  .rayons span:nth-child(3) { transform: rotate(0deg);   background: linear-gradient(90deg, var(--ray-3), rgba(255,255,255,0) 80%); animation-delay: .8s; }
+  .rayons span:nth-child(4) { transform: rotate(10deg);  background: linear-gradient(90deg, var(--ray-4), rgba(255,255,255,0) 80%); animation-delay: 1.2s; }
+  .rayons span:nth-child(5) { transform: rotate(20deg);  background: linear-gradient(90deg, var(--ray-5), rgba(255,255,255,0) 80%); animation-delay: 1.6s; }
+  .aura { position: absolute; left: 50%; top: 52%; width: 440px; aspect-ratio: 1; transform: translate(-50%,-50%); border-radius: 50%; background: radial-gradient(closest-side, rgba(255,255,255,.95), rgba(255,255,255,0)); }
+  .tri { position: absolute; left: 50%; top: 50%; width: 360px; height: auto; aspect-ratio: 1; animation: flotte 5s ease-in-out infinite; }
+
+  .verre {
+    position: absolute; width: 196px; padding: 12px 14px; border-radius: 16px;
+    background: var(--verre); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+    border: 1px solid var(--verre-bord); box-shadow: 0 18px 40px -22px rgba(20,26,58,.45);
+    animation: carte 6s ease-in-out infinite;
+  }
+  .verre.a { left: 0; top: 4%; }
+  .verre.b { right: 0; top: 12%; animation-delay: 1.2s; }
+  .verre.c { right: 6%; bottom: 2%; animation-delay: 2.4s; }
+  .verre-tete { display: flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600; color: var(--muted); }
+  .verre-tete i { width: 18px; height: 18px; border-radius: 6px; flex: none; }
+  .verre.a i { background: #fff; box-shadow: inset 0 0 0 1.5px var(--ink); }
+  .verre.b i { background: conic-gradient(var(--ray-1), var(--ray-2), var(--ray-3), var(--ray-4), var(--ray-5), var(--ray-1)); }
+  .verre.c i { border-radius: 50%; background: var(--accent); }
+  .verre-gros { margin-top: 8px; font-size: 28px; font-weight: 700; letter-spacing: -.03em; line-height: 1; }
+  .verre-sous { margin-top: 4px; font-size: 12px; color: var(--muted); }
+  .barres { margin-top: 9px; display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 4px; }
+  .barres span { height: 6px; border-radius: 3px; }
+  .barres span:nth-child(1) { background: var(--ray-1); }
+  .barres span:nth-child(2) { background: var(--ray-2); }
+  .barres span:nth-child(3) { background: var(--ray-3); }
+  .barres span:nth-child(4) { background: var(--ray-4); }
+  .barres span:nth-child(5) { background: var(--ray-5); }
+
+  h1 { margin: 0 0 20px; font-size: clamp(44px, 6.4vw, 82px); line-height: .94; letter-spacing: -.045em; font-weight: 700; text-wrap: balance; animation: monte .9s cubic-bezier(.2,.7,.1,1) both; }
+  .nw { white-space: nowrap; }
+  .sous { margin: 0 0 32px; max-width: 540px; font-size: 20px; line-height: 1.45; font-weight: 500; color: var(--ink-soft); text-wrap: pretty; }
 
   .carte {
-    max-width: 880px;
-    margin: 0 auto;
-    border: 1px solid var(--line);
-    border-radius: 18px;
-    background: var(--card);
-    box-shadow: 0 22px 60px -38px oklch(0 0 0 / 0.6);
+    border: 1px solid var(--verre-bord); border-radius: 20px;
+    background: rgba(255,255,255,.86); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+    box-shadow: 0 26px 60px -34px rgba(20,26,58,.5);
   }
-  .carte-haut { padding: 22px 26px 18px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
-  .champ {
-    flex: 1 1 260px;
-    min-width: 0;
-    border: 0;
-    outline: none;
-    background: transparent;
-    color: var(--ink);
-    font-size: 24px;
-    line-height: 1.3;
-    padding: 10px 0;
-  }
-  .champ::placeholder { color: var(--faint); }
+  .carte-haut { padding: 10px 10px 10px 22px; display: flex; gap: 10px 12px; align-items: center; flex-wrap: wrap; }
+  .champ { flex: 999 1 220px; min-width: 0; border: 0; outline: none; background: transparent; color: var(--ink); font-size: 19px; line-height: 1.3; padding: 12px 0; }
+  .champ::placeholder { color: #6b7192; }
   .bouton {
-    border: 0;
-    border-radius: 10px;
-    background: var(--ink);
-    color: var(--paper);
-    font-size: 16px;
-    font-weight: 700;
-    padding: 14px 22px;
-    min-height: 48px;
-    cursor: pointer;
-    white-space: nowrap;
+    flex: 1 0 auto; border: 0; border-radius: 14px; background: var(--accent); color: var(--accent-ink);
+    font-size: 16px; font-weight: 700; padding: 14px 24px; min-height: 52px; cursor: pointer; white-space: nowrap;
+    box-shadow: 0 12px 26px -12px var(--accent); transition: background .18s ease, transform .18s ease;
   }
-  .bouton:hover { background: var(--terra); }
-  .bouton:disabled { background: var(--line-soft); color: oklch(0.6 0.002 90); cursor: not-allowed; }
-  .carte-bas {
-    border-top: 1px solid var(--line-soft);
-    padding: 16px 26px;
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  .carte-bas input { width: 20px; height: 20px; margin: 1px 0 0; accent-color: var(--terra); flex: none; }
-  .carte-bas label { font-size: 14.5px; line-height: 1.45; color: var(--muted); }
-  .piege { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .bouton:hover { background: var(--ink); transform: translateY(-1px); }
+  .bouton:disabled { background: var(--line); color: #6b7192; box-shadow: none; cursor: not-allowed; transform: none; }
+  .carte-bas { border-top: 1px solid var(--line); padding: 12px 22px 14px; display: flex; align-items: flex-start; gap: 12px; }
+  .carte-bas input { width: 22px; height: 22px; margin: 0; accent-color: var(--accent); flex: none; }
+  .carte-bas label { font-size: 14px; line-height: 1.45; color: var(--muted); cursor: pointer; }
 
-  .etats { max-width: 880px; margin: 22px auto 0; min-height: 68px; }
-  .etat { animation: leve 0.3s ease both; }
-  .etat-envoi { display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 15px; }
-  .point { width: 9px; height: 9px; border-radius: 50%; background: var(--ink); animation: pouls 1s ease-in-out infinite; }
-  .etat-ok { text-align: center; font-size: 17px; font-weight: 600; }
-  .etat-ok span { display: block; margin-top: 6px; font-size: 14.5px; font-weight: 400; color: var(--muted); }
-  .etat-erreur {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    flex-wrap: wrap;
-    border: 1px solid oklch(0.82 0.1 25);
-    border-radius: 14px;
-    background: oklch(0.97 0.02 25);
-    padding: 18px 20px;
-  }
-  .etat-erreur strong { display: block; font-size: 17px; color: var(--err); }
-  .etat-erreur span { font-size: 14.5px; color: oklch(0.45 0.04 30); }
-  .etat-erreur button {
-    border: 1px solid oklch(0.62 0.16 28);
-    background: transparent;
-    color: var(--err);
-    border-radius: 10px;
-    padding: 10px 16px;
-    min-height: 44px;
-    font-size: 14.5px;
-    cursor: pointer;
-  }
+  .etats { margin-top: 16px; min-height: 64px; }
+  .etat { animation: leve .3s ease both; }
+  .etat-envoi { display: flex; align-items: center; gap: 12px; font-size: 15px; }
+  .etat-ok { display: flex; align-items: center; gap: 14px; padding: 12px 16px 12px 10px; border-radius: 16px; background: rgba(255,255,255,.86); border: 1px solid var(--verre-bord); }
+  .etat-ok strong { display: block; font-size: 17px; }
+  .etat-ok span { display: block; margin-top: 3px; font-size: 14.5px; color: var(--muted); }
+  .etat-erreur { display: flex; align-items: center; gap: 12px 14px; flex-wrap: wrap; border: 1px solid var(--err-line); border-radius: 16px; background: #fff; padding: 12px 14px 12px 10px; }
+  .etat-erreur > div { flex: 1 1 200px; min-width: 0; }
+  .etat-erreur strong { display: block; font-size: 16.5px; color: var(--err); }
+  .etat-erreur span { display: block; margin-top: 3px; font-size: 14px; color: var(--muted); }
+  .etat-erreur button { border: 1px solid var(--err); background: transparent; color: var(--err); border-radius: 12px; padding: 10px 16px; min-height: 44px; font-size: 14.5px; font-weight: 600; cursor: pointer; }
+  .etat img { flex: none; }
 
-  .comment { max-width: 880px; margin: 8px auto 0; text-align: center; }
   .comment summary {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    min-height: 44px;
-    font-size: 14px;
-    color: oklch(0.45 0.002 90);
-    cursor: pointer;
-    list-style: none;
+    display: inline-flex; align-items: center; gap: 8px; min-height: 44px;
+    font-size: 14px; font-weight: 600; color: var(--ink-soft); cursor: pointer; list-style: none;
   }
   .comment summary::-webkit-details-marker { display: none; }
-  .comment summary::before { content: '›'; transition: transform 0.2s; }
+  .comment summary::before { content: '›'; transition: transform .2s; }
   .comment[open] summary::before { transform: rotate(90deg); }
   .comment summary:hover { color: var(--ink); }
-  .etapes {
-    margin: 10px auto 0;
-    padding: 0;
-    max-width: 640px;
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 14px;
-    text-align: left;
-  }
-  .etapes li { border-top: 2px solid var(--terra); padding-top: 10px; font-size: 14.5px; line-height: 1.5; color: var(--muted); }
-  .etapes b { display: block; color: var(--ink); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .etapes { margin: 8px 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; }
+  .etapes li { padding-top: 10px; font-size: 14px; line-height: 1.5; color: var(--muted); border-top: 3px solid var(--accent); }
+  .etapes li:first-child { border-top-color: #fff; box-shadow: 0 -1px 0 rgba(20,26,58,.12); }
+  .etapes li:last-child { border-image: linear-gradient(90deg, var(--ray-1) 0 20%, var(--ray-2) 20% 40%, var(--ray-3) 40% 60%, var(--ray-4) 60% 80%, var(--ray-5) 80% 100%) 1; }
+  .etapes b { display: block; color: var(--ink); font-size: 13px; letter-spacing: .06em; text-transform: uppercase; }
 
-  .bloc { max-width: 1040px; margin: 0 auto; padding: 72px 40px; }
-  .bloc-titre { margin: 0 0 8px; font-size: clamp(30px, 4vw, 44px); line-height: 1; letter-spacing: -0.035em; }
-  .bloc-sous { margin: 0 0 32px; font-size: 17px; line-height: 1.5; color: var(--muted); max-width: 620px; }
-  .apercu { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: center; }
-  .apercu figure { margin: 0; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 30px 70px -45px oklch(0 0 0 / 0.55); max-height: 620px; }
-  .apercu img { display: block; width: 100%; height: auto; }
-  .points { margin: 0; padding: 0; list-style: none; display: grid; gap: 22px; }
-  .points li { font-size: 17px; line-height: 1.5; color: var(--ink-soft); }
-  .points b { display: block; color: var(--ink); font-size: 19px; margin-bottom: 2px; }
+  /* Sections */
+  .bloc { max-width: 1120px; margin: 0 auto; padding: 72px 40px; }
+  .bloc-titre { margin: 0 0 8px; font-size: clamp(30px, 4vw, 46px); line-height: 1; letter-spacing: -.035em; }
+  .bloc-sous { margin: 0 0 30px; font-size: 17px; line-height: 1.5; color: var(--muted); }
+  .apercu { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 40px 56px; align-items: center; }
+  .points { margin: 0; padding: 0; list-style: none; display: grid; gap: 14px; }
+  .points li { display: grid; grid-template-columns: 40px minmax(0,1fr); gap: 14px; align-items: start; padding: 14px 16px; border-radius: 16px; background: var(--card); border: 1px solid var(--line); font-size: 16px; line-height: 1.5; color: var(--ink-soft); }
+  .points i { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; color: #fff; font-style: normal; font-weight: 700; }
+  .points li:nth-child(1) i { background: #1a7f99; }
+  .points li:nth-child(2) i { background: #6a45d8; }
+  .points li:nth-child(3) i { background: #c2357c; }
+  .points b { display: block; color: var(--ink); font-size: 18px; margin-bottom: 2px; }
+  .capture { position: relative; }
+  .capture figure { margin: 0; border-radius: 22px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 30px 70px -45px rgba(20,26,58,.55); max-height: 620px; background: var(--card); }
+  .capture figure img { width: 100%; height: auto; }
+  .capture .tri-coin { position: absolute; left: -26px; bottom: -30px; width: 110px; height: 110px; }
 
-  .faq { border-top: 1px solid var(--line); }
-  .faq details { border-bottom: 1px solid var(--line); }
-  .faq summary {
-    cursor: pointer;
-    list-style: none;
-    min-height: 56px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    font-size: 18px;
-    font-weight: 600;
-  }
+  .faq { display: grid; gap: 10px; }
+  .faq details { border-radius: 16px; background: var(--card); border: 1px solid var(--line); padding: 0 18px; }
+  .faq summary { cursor: pointer; list-style: none; min-height: 60px; padding: 12px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; font-size: 17.5px; font-weight: 600; }
   .faq summary::-webkit-details-marker { display: none; }
-  .faq summary::after { content: '+'; font-size: 22px; font-weight: 400; color: var(--muted); }
+  .faq summary::after { content: '+'; width: 30px; height: 30px; border-radius: 50%; background: var(--paper); display: grid; place-items: center; font-size: 18px; font-weight: 400; color: var(--ink-soft); flex: none; }
   .faq details[open] summary::after { content: '–'; }
-  .faq p { margin: 0 0 20px; font-size: 16px; line-height: 1.55; color: var(--muted); max-width: 680px; }
+  .faq p { margin: 0 0 18px; font-size: 16px; line-height: 1.55; color: var(--muted); max-width: 680px; text-wrap: pretty; }
 
-  footer {
-    max-width: 1040px;
-    margin: 0 auto;
-    padding: 28px 40px 48px;
-    display: flex;
-    justify-content: space-between;
-    gap: 12px;
-    flex-wrap: wrap;
-    font-size: 13.5px;
-    color: var(--muted);
+  footer { max-width: 1120px; margin: 0 auto; padding: 24px 40px 44px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; font-size: 13.5px; color: var(--muted); border-top: 1px solid var(--line); }
+  footer > span { display: inline-flex; align-items: center; gap: 10px; }
+  footer a { display: inline-flex; align-items: center; min-height: 44px; }
+
+  @media (max-width: 960px) {
+    .grille { flex-wrap: wrap; }
+    .scene { height: 440px; }
+    .tri { width: 260px; }
+    .aura { width: 320px; }
   }
-
   @media (max-width: 720px) {
-    .wash { padding: 18px 16px 44px; }
-    .top { margin-bottom: 34px; }
-    .top > span:first-child { display: none; }
-    .top { grid-template-columns: 1fr auto; }
-    .sous { font-size: 17px; margin-bottom: 32px; }
-    .carte-haut { padding: 16px 16px 14px; }
-    .champ { font-size: 20px; }
-    .bouton { width: 100%; }
-    .carte-bas { padding: 14px 16px; }
-    .etapes { grid-template-columns: minmax(0, 1fr); }
+    .heros { padding: 14px 16px 48px; }
+    .marque { letter-spacing: .14em; }
+    .scene { height: 340px; }
+    .tri { width: 210px; }
+    .aura { width: 260px; }
+    .verre { width: 152px; padding: 10px 12px; }
+    .verre-gros { font-size: 22px; }
+    .sous { font-size: 17px; }
+    .carte-haut { padding: 10px 10px 10px 16px; }
+    .carte-bas { padding: 12px 16px 14px; }
     .bloc { padding: 56px 16px; }
-    .apercu { grid-template-columns: minmax(0, 1fr); gap: 32px; }
     footer { padding: 24px 16px 40px; }
+    .capture .tri-coin { left: -8px; width: 84px; height: 84px; }
   }
 </style>
 </head>
 <body>
 
-<header class="wash">
+<header class="heros">
   <div class="top">
-    <span></span>
-    <span class="brand">Prisme</span>
+    <span class="marque">
+      <img src="img/tri-lit.png" srcset="img/tri-lit.png 1x, img/tri-lit@2x.png 2x" width="34" height="34" alt="">
+      <span>Prisme</span>
+    </span>
     <a class="gh" href="https://github.com/jbkrady/prisme" target="_blank" rel="noopener noreferrer">
       <svg width="17" height="17" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
       <span>Le projet</span>
     </a>
   </div>
 
-  <h1>L’essentiel <span class="nw">de l’IA</span><br>pour les PM</h1>
-  <p class="sous">Chaque matin à 8&nbsp;h&nbsp;30, un agent lit 14&nbsp;sources, garde 5&nbsp;nouveautés au plus et te dit ce qu’elles changent pour un Product Manager. En 2 minutes.</p>
-
-  <form class="carte" id="form" novalidate>
-    <div class="carte-haut">
-      <label for="email" class="piege">Ton adresse e-mail</label>
-      <input class="champ" id="email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="ton.adresse@email.com" required>
-      <button class="bouton" id="bouton" type="submit">Je m’inscris</button>
+  <div class="grille">
+    <div class="scene" aria-hidden="true">
+      <div class="faisceau-halo"></div>
+      <div class="faisceau"></div>
+      <div class="rayons"><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="aura"></div>
+      <img class="tri" id="tri" src="img/tri-lit@2x.png" width="400" height="400" alt="">
+      <div class="verre a">
+        <div class="verre-tete"><i></i><span>Ce matin, 6&nbsp;h</span></div>
+        <div class="verre-gros">14 sources</div>
+        <div class="verre-sous">lues pour toi</div>
+      </div>
+      <div class="verre b">
+        <div class="verre-tete"><i></i><span>Retenues</span></div>
+        <div class="verre-gros">5 nouveautés</div>
+        <div class="barres"><span></span><span></span><span></span><span></span><span></span></div>
+      </div>
+      <div class="verre c">
+        <div class="verre-tete"><i></i><span>Prochain numéro</span></div>
+        <div class="verre-gros">8&nbsp;h&nbsp;30</div>
+        <div class="verre-sous">2 minutes de lecture</div>
+      </div>
     </div>
-    <div class="carte-bas">
-      <input id="consentement" name="consentement" type="checkbox" required>
-      <label for="consentement">J’accepte de recevoir Prisme par e-mail, un numéro par jour. Gratuit, désinscription en un clic depuis chaque mail.</label>
-    </div>
-    <div class="piege" aria-hidden="true">
-      <label for="site">Ne pas remplir</label>
-      <input id="site" name="site" type="text" tabindex="-1" autocomplete="off">
-    </div>
-  </form>
 
-  <div class="etats" id="statut" aria-live="polite"></div>
+    <div class="texte">
+      <h1>L’essentiel <span class="nw">de l’IA</span> pour les PM</h1>
+      <p class="sous">Chaque matin à 8&nbsp;h&nbsp;30, un agent lit 14&nbsp;sources, garde 5&nbsp;nouveautés au plus et te dit ce qu’elles changent pour un Product Manager. En 2 minutes.</p>
 
-  <details class="comment">
-    <summary>Comment ça marche</summary>
-    <ol class="etapes">
-      <li><b>6&nbsp;h</b>n8n lit 14&nbsp;sources&nbsp;: éditeurs IA, outils des PM, médias tech.</li>
-      <li><b>7&nbsp;h&nbsp;30</b>Un agent Claude écarte le bruit, choisit 5&nbsp;nouveautés au plus et rédige.</li>
-      <li><b>8&nbsp;h&nbsp;30</b>Le mail arrive, toujours au même format. Un clic pour dire s’il t’a servi.</li>
-    </ol>
-  </details>
+      <form class="carte" id="form" novalidate>
+        <div class="carte-haut">
+          <label for="email" class="sr">Ton adresse e-mail</label>
+          <input class="champ" id="email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="ton.adresse@email.com" required>
+          <button class="bouton" id="bouton" type="submit">Je m’inscris</button>
+        </div>
+        <div class="carte-bas">
+          <input id="consentement" name="consentement" type="checkbox" required>
+          <label for="consentement">J’accepte de recevoir Prisme par e-mail, un numéro par jour. Gratuit, désinscription en un clic depuis chaque mail.</label>
+        </div>
+        <div class="sr" aria-hidden="true">
+          <label for="site">Ne pas remplir</label>
+          <input id="site" name="site" type="text" tabindex="-1" autocomplete="off">
+        </div>
+      </form>
+
+      <div class="etats" id="statut" aria-live="polite"></div>
+
+      <details class="comment">
+        <summary>Comment ça marche</summary>
+        <ol class="etapes">
+          <li><b>6&nbsp;h</b>n8n lit 14&nbsp;sources&nbsp;: éditeurs IA, outils des PM, médias tech.</li>
+          <li><b>7&nbsp;h&nbsp;30</b>Un agent Claude écarte le bruit, choisit 5&nbsp;nouveautés au plus et rédige.</li>
+          <li><b>8&nbsp;h&nbsp;30</b>Le mail arrive, toujours au même format. Un clic pour dire s’il t’a servi.</li>
+        </ol>
+      </details>
+    </div>
+  </div>
 </header>
 
 <main>
@@ -302,18 +288,21 @@
         <h2 class="bloc-titre" id="t-apercu">À quoi ressemble un numéro.</h2>
         <p class="bloc-sous">Un extrait du numéro du 2 octobre 2026.</p>
         <ul class="points">
-          <li><b>L’essentiel en 3 phrases.</b>Ce qu’il faut retenir aujourd’hui, avant même de défiler.</li>
-          <li><b>5&nbsp;nouveautés au plus.</b>Lancements, nouvelles fonctions, modèles, études&nbsp;: rien d’autre.</li>
-          <li><b>Ce que ça change pour un PM.</b>Chaque article tient en deux phrases, avec un impact noté de faible à fort.</li>
+          <li><i>1</i><span><b>L’essentiel en 3 phrases.</b>Ce qu’il faut retenir aujourd’hui, avant même de défiler.</span></li>
+          <li><i>5</i><span><b>5&nbsp;nouveautés au plus.</b>Lancements, nouvelles fonctions, modèles, études&nbsp;: rien d’autre.</span></li>
+          <li><i>PM</i><span><b>Ce que ça change pour un PM.</b>Chaque article tient en deux phrases, avec un impact noté de faible à fort.</span></li>
         </ul>
       </div>
-      <figure>
-        <img src="exemple-mail.png" width="640" height="1320" alt="Un numéro de Prisme : l’essentiel du jour en trois points, puis des articles avec leur type, leur impact pour un PM et deux phrases de résumé.">
-      </figure>
+      <div class="capture">
+        <figure>
+          <img src="exemple-mail.png" width="640" height="1320" alt="Un numéro de Prisme : l’essentiel du jour en trois points, puis des articles avec leur type, leur impact pour un PM et deux phrases de résumé.">
+        </figure>
+        <img class="tri-coin" src="img/tri-content.png" srcset="img/tri-content.png 1x, img/tri-content@2x.png 2x" width="110" height="110" alt="">
+      </div>
     </div>
   </section>
 
-  <section class="bloc" aria-labelledby="t-faq">
+  <section class="bloc" aria-labelledby="t-faq" style="padding-top: 24px;">
     <h2 class="bloc-titre" id="t-faq">Questions.</h2>
     <p class="bloc-sous">Prisme est en bêta&nbsp;: tes retours décident de la suite.</p>
     <div class="faq">
@@ -338,7 +327,10 @@
 </main>
 
 <footer>
-  <span>Prisme · une veille construite par Jean-Baptiste Krady</span>
+  <span>
+    <img src="img/tri-dort.png" srcset="img/tri-dort.png 1x, img/tri-dort@2x.png 2x" width="34" height="34" alt="Tri, la mascotte de Prisme">
+    <span>Prisme · une veille construite par Jean-Baptiste Krady</span>
+  </span>
   <a href="https://krady.fr" target="_blank" rel="noopener">krady.fr</a>
 </footer>
 
@@ -351,7 +343,9 @@
     var site = document.getElementById('site');
     var bouton = document.getElementById('bouton');
     var statut = document.getElementById('statut');
+    var tri = document.getElementById('tri');
 
+    function humeur(nom) { tri.src = 'img/tri-' + nom + '@2x.png'; }
     function vider() { while (statut.firstChild) statut.removeChild(statut.firstChild); }
     function el(tag, cls, texte) {
       var e = document.createElement(tag);
@@ -359,21 +353,32 @@
       if (texte) e.textContent = texte;
       return e;
     }
+    function image(nom, taille) {
+      var i = el('img');
+      i.src = 'img/tri-' + nom + '.png';
+      i.srcset = 'img/tri-' + nom + '.png 1x, img/tri-' + nom + '@2x.png 2x';
+      i.width = taille; i.height = taille; i.alt = '';
+      return i;
+    }
     function envoi() {
-      vider();
+      vider(); humeur('trie');
       var d = el('div', 'etat etat-envoi');
-      d.appendChild(el('span', 'point'));
+      d.appendChild(image('trie', 48));
       d.appendChild(el('span', '', 'On t’envoie le lien de confirmation…'));
       statut.appendChild(d);
     }
     function ok() {
-      vider();
-      var d = el('p', 'etat etat-ok', 'Vérifie ta boîte mail.');
-      d.appendChild(el('span', '', 'Un lien de confirmation t’attend. Pense à regarder dans les indésirables.'));
+      vider(); humeur('content');
+      var d = el('div', 'etat etat-ok');
+      var t = el('div');
+      t.appendChild(el('strong', '', 'Vérifie ta boîte mail.'));
+      t.appendChild(el('span', '', 'Un lien de confirmation t’attend. Pense à regarder dans les indésirables.'));
+      d.appendChild(image('content', 60));
+      d.appendChild(t);
       statut.appendChild(d);
     }
     function erreur(message) {
-      vider();
+      vider(); humeur('oups');
       var d = el('div', 'etat etat-erreur');
       var t = el('div');
       t.appendChild(el('strong', '', 'L’inscription n’est pas passée'));
@@ -381,6 +386,7 @@
       var r = el('button', '', 'Réessayer');
       r.type = 'button';
       r.addEventListener('click', function () { form.requestSubmit(); });
+      d.appendChild(image('oups', 54));
       d.appendChild(t);
       d.appendChild(r);
       statut.appendChild(d);
@@ -392,6 +398,7 @@
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(adresse)) { erreur('Cette adresse e-mail ne semble pas valide.'); email.focus(); return; }
       if (!consentement.checked) { erreur('Coche la case pour accepter de recevoir Prisme.'); consentement.focus(); return; }
       bouton.disabled = true;
+      bouton.textContent = 'Envoi…';
       envoi();
       fetch(URL_INSCRIPTION, {
         method: 'POST',
@@ -400,10 +407,10 @@
       })
         .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { r: r, j: j }; }); })
         .then(function (x) {
-          bouton.disabled = false;
+          bouton.disabled = false; bouton.textContent = 'Je m’inscris';
           if (x.r.ok && x.j.ok) { ok(); form.reset(); } else { erreur(x.j.erreur); }
         })
-        .catch(function () { bouton.disabled = false; erreur(); });
+        .catch(function () { bouton.disabled = false; bouton.textContent = 'Je m’inscris'; erreur(); });
     });
   })();
 </script>
