@@ -1,0 +1,15 @@
+/* Prisme — palette retenue : Holo. Mascotte : Tri. */
+:root {
+  --ink: #141a3a;
+  --muted: #4a5172;
+  --paper: #f5f8ff;
+  --card: #ffffff;
+  --line: #dbe3f5;
+  --accent: #3c4fe0;
+  --accent-ink: #ffffff;
+  --ray-1: #38c6e8;
+  --ray-2: #4f7cf5;
+  --ray-3: #8a63f0;
+  --ray-4: #f06fb0;
+  --ray-5: #3fcf9a;
+}
