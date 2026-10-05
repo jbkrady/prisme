@@ -17,17 +17,21 @@ L'essentiel de l'IA pour les Product Managers, chaque matin à 8 h 30. Un agent 
 
 Autres circuits n8n : Inscription, Confirmation, Désinscription, Votes, Numéro en ligne (« Voir dans le navigateur »). Ils ont un filtre anti-robots : tester avec un user-agent de navigateur, pas un curl brut.
 
+**Où tourne n8n.** L'essai n8n Cloud (`jbkrady.app.n8n.cloud`) a pris fin le 3 octobre 2026. Migration en cours vers un n8n auto-hébergé sur VPS Hostinger (`n8n.krady.fr`). Les liens publics (site, mails) passent par `prisme.krady.fr/api/<circuit>`, que le Worker relaie vers n8n : changer d'hébergeur, c'est changer une ligne de `worker.js`.
+
 ## Le dépôt
 
 - `.claude/skills/grille-prisme/SKILL.md` : la méthode (écarter, classer, rédiger, JSON strict). La routine la relit à chaque passage : un push sur `main` suffit pour la changer.
 - `.claude/agents/prisme.md` : le rédacteur, sans aucun outil (il lit du contenu web : chacun n'a que les droits de son rôle).
 - `site/` : prisme.krady.fr (page d'inscription, `img/` pour Tri, `mail/` pour les images des mails, `apercu/` pour l'exemple de numéro). Design : projet Claude Design « Lancer la routine », fichiers « Prisme Site v2 » et « Prisme Mail ».
 - `design/mascotte/` : le kit de Tri (5 expressions, 1x et 2x).
+- `n8n/` : l'export des 8 circuits (sauvegarde, base de réinstallation) et la liste des tables. Sans identifiants ni données.
+- `worker.js` : sert `site/` et relaie `/api/*` vers les webhooks n8n (liste blanche des circuits publics).
 
 ## Publier
 
 - Site : `npx wrangler deploy` depuis ce dossier (Worker Cloudflare `prisme`, domaine prisme.krady.fr, pas d'adresse workers.dev).
-- Le gabarit du mail vit dans n8n (nœud « Mettre en page » de Prisme · Envoi) : le modifier là, puis republier le circuit.
+- Le gabarit du mail vit dans n8n (nœud « Mettre en page » de Prisme · Envoi) : le modifier là, puis republier le circuit, puis réexporter dans `n8n/`.
 
 ## Règles
 
