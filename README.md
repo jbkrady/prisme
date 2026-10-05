@@ -16,6 +16,8 @@ Prisme est un agent autonome : chaque matin, sans personne, il lit l'actualité 
          n8n · Votes        reçoit les clics « Utile / Pas utile »
 ```
 
+Les circuits n8n sont exportés dans [`n8n/`](n8n/). Depuis la fin de l'essai n8n Cloud (octobre 2026), n8n est auto-hébergé ; les liens publics passent par `prisme.krady.fr/api/...` (`worker.js`), pour ne plus dépendre de l'adresse de n8n.
+
 ## Skill et agent : qui fait quoi
 
 | | Rôle | Fichier |

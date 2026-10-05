@@ -1,11 +1,16 @@
-// Page d'inscription de Prisme : un Worker Cloudflare qui ne sert que les fichiers statiques de site/.
+// Page d'inscription de Prisme : un Worker Cloudflare qui sert les fichiers statiques de site/
+// et relaie /api/* vers les webhooks n8n (worker.js).
 // Publiée à la main : npx wrangler deploy (crée aussi l'adresse prisme.krady.fr).
 {
   "name": "prisme",
+  "main": "worker.js",
   "compatibility_date": "2026-10-02",
   "assets": {
     "directory": "./site",
-    "not_found_handling": "404-page"
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    // /api/* n'est pas un fichier : le Worker répond avant la page 404.
+    "run_worker_first": ["/api/*"]
   },
   "routes": [{ "pattern": "prisme.krady.fr", "custom_domain": true }],
   // Pas d'adresse provisoire en *.workers.dev : le sous-domaine du compte ne doit pas apparaître.
