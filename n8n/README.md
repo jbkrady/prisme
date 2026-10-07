@@ -1,6 +1,6 @@
 # Les circuits n8n de Prisme
 
-Export des 8 circuits tels qu'ils tournaient sur n8n Cloud (`jbkrady.app.n8n.cloud`) jusqu'au 2 octobre 2026, à la fin de l'essai. Ils servent de sauvegarde et de base pour la réinstallation sur un n8n auto-hébergé (`n8n.krady.fr`, VPS Hostinger).
+Les 8 circuits de Prisme, exportés de n8n Cloud (`jbkrady.app.n8n.cloud`) à la fin de l'essai (3 octobre 2026), puis adaptés au n8n auto-hébergé (`n8n.krady.fr`, VPS Hostinger) : liens par `prisme.krady.fr/api/...`, envoi par Resend en SMTP, numérotation qui part du 8 octobre 2026 (N° 1).
 
 | Fichier | Circuit | Déclencheur |
 |---|---|---|
@@ -15,9 +15,9 @@ Export des 8 circuits tels qu'ils tournaient sur n8n Cloud (`jbkrady.app.n8n.clo
 
 ## Ce que l'export ne contient pas
 
-- **Les identifiants** (Gmail) : à recréer sur la nouvelle instance.
+- **Les identifiants** : l'identifiant SMTP « Prisme Resend » se crée sur l'instance (clé Resend, jamais dans le dépôt).
 - **Les données** : les 6 data tables sont à recréer (colonnes ci-dessous). Les abonnés ne passent jamais par ce dépôt.
-- **L'adresse de JB** : remplacée par `ADRESSE_DE_JB` dans le nœud « Prévenir : pas d'édition » d'`envoi.json`.
+- **L'adresse de JB** : remplacée par `ADRESSE_DE_JB` (destinataire de « Prévenir : pas d'édition », adresse de réponse des mails aux abonnés).
 
 | Table | Colonnes (texte sauf mention) |
 |---|---|
@@ -31,8 +31,10 @@ Export des 8 circuits tels qu'ils tournaient sur n8n Cloud (`jbkrady.app.n8n.clo
 ## À changer en réinstallant
 
 1. Les identifiants de tables (`dataTableId`) : remplacer par ceux de la nouvelle instance.
-2. Les adresses `https://jbkrady.app.n8n.cloud/webhook/...` écrites dans les nœuds (« Mettre en page » d'Envoi, « Préparer l'abonné » d'Inscription, mail de bienvenue de Confirmation) : remplacer par `https://prisme.krady.fr/api/...`. Le Worker du site (`worker.js`) relaie vers n8n.
-3. Les nœuds Gmail : nouvel identifiant (SMTP Gmail avec mot de passe d'application, ou client OAuth Google à soi).
-4. `ADRESSE_DE_JB` : remettre la vraie adresse, sur l'instance seulement.
+2. Les 4 nœuds d'envoi (« Send Email ») : choisir l'identifiant SMTP « Prisme Resend ».
+3. `ADRESSE_DE_JB` : remettre la vraie adresse, sur l'instance seulement.
+4. Rendre « Prisme · Réception » disponible en MCP, puis mettre à jour dans le texte de la routine les identifiants du tableau `prisme_candidats`, du projet et du circuit Réception.
+
+Les adresses publiques ne changent plus : elles passent toutes par `prisme.krady.fr/api/...` et `worker.js` relaie vers n8n.
 
 Pour importer à la main : dans n8n, « Import from File » sur chaque fichier.
