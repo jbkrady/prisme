@@ -17,7 +17,11 @@ L'essentiel de l'IA pour les Product Managers, chaque matin à 8 h 30. Un agent 
 
 Autres circuits n8n : Inscription, Confirmation, Désinscription, Votes, Numéro en ligne (« Voir dans le navigateur »). Ils ont un filtre anti-robots : tester avec un user-agent de navigateur, pas un curl brut.
 
-**Où tourne n8n.** L'essai n8n Cloud (`jbkrady.app.n8n.cloud`) a pris fin le 3 octobre 2026. Migration en cours vers un n8n auto-hébergé sur VPS Hostinger (`n8n.krady.fr`). Les liens publics (site, mails) passent par `prisme.krady.fr/api/<circuit>`, que le Worker relaie vers n8n : changer d'hébergeur, c'est changer une ligne de `worker.js`.
+**Où tourne n8n.** L'essai n8n Cloud (`jbkrady.app.n8n.cloud`) a pris fin le 3 octobre 2026. n8n est auto-hébergé sur un VPS Hostinger KVM 2 (`n8n.krady.fr`, Docker, fuseau `Europe/Paris`, historique des exécutions purgé à 14 jours). Les liens publics (site, mails) passent par `prisme.krady.fr/api/<circuit>`, que le Worker relaie vers n8n : changer d'hébergeur, c'est changer une ligne de `worker.js`. La routine parle à n8n par le connecteur MCP de l'instance (`n8n.krady.fr/mcp-server/http`) ; ses identifiants de tableau et de circuit sont écrits dans son texte : les mettre à jour si on recrée un tableau ou un circuit.
+
+**Envoi des mails.** Par Resend (offre gratuite : 100 mails par jour, 3 000 par mois), en SMTP depuis `Prisme <prisme@krady.fr>`, réponses vers l'adresse @krady.fr de JB (iCloud). Plus de Google pour Prisme. Au-delà d'environ 90 abonnés, passer à Brevo gratuit (300 par jour, activation par leur support à demander à l'avance) ou à Resend payant : seul l'identifiant SMTP change dans n8n.
+
+**Entretien du serveur.** Mettre n8n à jour chaque mois (failles graves en 2026). Si Hermes s'installe sur le même VPS : conteneur séparé, sans accès au dossier de n8n ni au socket Docker, mémoire plafonnée, rien de lourd entre 6 h et 8 h 45.
 
 ## Le dépôt
 
@@ -32,9 +36,10 @@ Autres circuits n8n : Inscription, Confirmation, Désinscription, Votes, Numéro
 
 - Site : `npx wrangler deploy` depuis ce dossier (Worker Cloudflare `prisme`, domaine prisme.krady.fr, pas d'adresse workers.dev).
 - Le gabarit du mail vit dans n8n (nœud « Mettre en page » de Prisme · Envoi) : le modifier là, puis republier le circuit, puis réexporter dans `n8n/`.
+- Depuis une session Claude Code dans le cloud, `wrangler deploy` ne peut publier que `worker.js` : l'envoi des fichiers de `site/` y est refusé. Un changement de `site/` se publie depuis le Mac.
 
 ## Règles
 
-- Ne jamais renvoyer un mail aux abonnés pour un test : tester à blanc (Gmail simulé) ou vers JB seul.
+- Ne jamais renvoyer un mail aux abonnés pour un test : tester à blanc ou vers JB seul.
 - Jamais de secret ni d'adresse d'abonné dans le dépôt ou le chat.
 - Chaque changement du skill part d'un constat d'usage (votes, retours, numéros reçus) : c'est la boucle racontée dans le cas Prisme du portfolio.
