@@ -1,3 +1,4 @@
 .DS_Store
 .env*
 .wrangler/
+Capture d’écran*.png

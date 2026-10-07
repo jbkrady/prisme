@@ -37,4 +37,15 @@ Les 8 circuits de Prisme, exportés de n8n Cloud (`jbkrady.app.n8n.cloud`) à la
 
 Les adresses publiques ne changent plus : elles passent toutes par `prisme.krady.fr/api/...` et `worker.js` relaie vers n8n.
 
-Pour importer à la main : dans n8n, « Import from File » sur chaque fichier.
+Pour importer à la main : dans n8n, « Import from File » sur chaque fichier. La réinstallation du 8 octobre 2026 s'est faite par l'API publique de n8n (`POST /api/v1/data-tables`, `POST /api/v1/workflows`, puis `/activate`), avec une copie des fichiers adaptée hors du dépôt.
+
+## Lancer à la main un circuit planifié
+
+Collecte et Envoi n'ont qu'un déclencheur horaire : ni l'API publique ni `n8n execute` ne savent les lancer. `lancer.py` en fait une copie temporaire déclenchée par un webhook secret, l'appelle, affiche le résultat nœud par nœud, puis supprime la copie :
+
+```
+set -a; . ~/.config/prisme/n8n.env; set +a
+python3 -I n8n/lancer.py <identifiant du circuit>
+```
+
+Attention : un Envoi lancé à la main envoie vraiment le mail à tous les abonnés actifs.
