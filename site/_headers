@@ -1,7 +1,7 @@
 # En-têtes de sécurité, appliqués par Cloudflare à chaque fichier de prisme.krady.fr (comme krady.fr).
 # - HTTPS obligatoire : une semaine pour commencer (604800 s), à allonger si rien ne casse.
 # - Le site ne s'affiche pas dans le cadre d'un autre site (anti-piège à clics)…
-# - … sauf /apercu/ : l'exemple de numéro est montré dans la visionneuse du cas Prisme sur krady.fr.
+# - … sauf /apercu/ : l'exemple de numéro est montré dans l'encart de la page d'inscription ('self') et dans la visionneuse du cas Prisme sur krady.fr.
 # Pas de filtre de scripts (CSP complet).
 /*
   Strict-Transport-Security: max-age=604800
@@ -11,4 +11,4 @@
 
 /apercu/*
   ! X-Frame-Options
-  Content-Security-Policy: frame-ancestors https://krady.fr https://preview.krady.fr http://localhost:*
+  Content-Security-Policy: frame-ancestors 'self' https://krady.fr https://preview.krady.fr http://localhost:*
