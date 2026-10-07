@@ -15,7 +15,7 @@ Les 8 circuits de Prisme, exportés de n8n Cloud (`jbkrady.app.n8n.cloud`) à la
 
 ## Ce que l'export ne contient pas
 
-- **Les identifiants** : l'identifiant SMTP « Prisme Resend » se crée sur l'instance (clé Resend, jamais dans le dépôt).
+- **Les identifiants** : l'identifiant SMTP « Prisme Resend » se crée sur l'instance (clé Resend, jamais dans le dépôt). Sur n8n.krady.fr, il s'appelle « SMTP account » : seul son identifiant compte.
 - **Les données** : les 6 data tables sont à recréer (colonnes ci-dessous). Les abonnés ne passent jamais par ce dépôt.
 - **L'adresse de JB** : remplacée par `ADRESSE_DE_JB` (destinataire de « Prévenir : pas d'édition », adresse de réponse des mails aux abonnés).
 
@@ -49,3 +49,5 @@ python3 -I n8n/lancer.py <identifiant du circuit>
 ```
 
 Attention : un Envoi lancé à la main envoie vraiment le mail à tous les abonnés actifs.
+
+Piège de minuit : la routine Claude ne connaît que la date UTC. Lancée à la main entre minuit à Paris et 2 h (1 h l'hiver), elle cherche les candidats de la veille et dépose une édition vide (que la Réception date du jour, heure de Paris). Tester la routine en journée, ou copier d'abord les candidats sous la date UTC. À 7 h 30, les deux dates coïncident.
