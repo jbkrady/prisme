@@ -41,4 +41,4 @@ La v2 répond à chaque constat : sources fixes collectées par n8n, fenêtre de
 
 ## Licence
 
-Le code est sous licence MIT. Le nom Prisme, la mascotte Tri et les visuels (`design/`, `site/img/`, `site/mail/`, carte de partage et icônes) restent la propriété de Jean-Baptiste Krady, tous droits réservés (voir [`LICENSE-VISUELS`](LICENSE-VISUELS)).
+Le code est sous licence MIT. Le nom Prisme, la mascotte Tri et les visuels (mascotte, images du site et des mails, carte de partage, icônes) restent la propriété de Jean-Baptiste Krady, tous droits réservés : ils ne sont pas publiés dans ce dépôt (voir [`LICENSE-VISUELS`](LICENSE-VISUELS)).
