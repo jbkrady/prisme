@@ -12,12 +12,12 @@ Les circuits de Prisme. Les 8 premiers ont été exportés de n8n Cloud (`jbkrad
 | `desinscription.json` | Prisme · Désinscription | webhook `prisme-desinscription` |
 | `votes.json` | Prisme · Votes | webhook `prisme-vote` |
 | `numero-en-ligne.json` | Prisme · Numéro en ligne | webhook `prisme-numero` (« Voir dans le navigateur ») |
-| `menage.json` | Prisme · Ménage | 15 h, efface de `prisme_abonnes` les inscriptions `en_attente` de plus de 30 jours (ajouté le 11 octobre 2026, directement sur `n8n.krady.fr`) |
+| `menage.json` | Prisme · Ménage | 15 h, efface de `prisme_abonnes` les inscriptions `en_attente` de plus de 30 jours et les `desinscrit`, puis note le nombre du jour dans `prisme_desinscriptions` (ajouté le 11 octobre 2026, directement sur `n8n.krady.fr`) |
 
 ## Ce que l'export ne contient pas
 
 - **Les identifiants** : l'identifiant SMTP « Prisme Resend » se crée sur l'instance (clé Resend, jamais dans le dépôt). Sur n8n.krady.fr, il s'appelle « SMTP account » : seul son identifiant compte.
-- **Les données** : les 6 data tables sont à recréer (colonnes ci-dessous). Les abonnés ne passent jamais par ce dépôt.
+- **Les données** : les 7 data tables sont à recréer (colonnes ci-dessous). Les abonnés ne passent jamais par ce dépôt.
 
 | Table | Colonnes (texte sauf mention) |
 |---|---|
@@ -27,6 +27,7 @@ Les circuits de Prisme. Les 8 premiers ont été exportés de n8n Cloud (`jbkrad
 | `prisme_pages` | date_edition, html |
 | `prisme_votes` | date_edition, vote, jeton |
 | `prisme_abonnes` | email, jeton, statut, confirme_le |
+| `prisme_desinscriptions` | date, nombre (nombre) |
 
 ## À changer en réinstallant
 

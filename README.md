@@ -16,7 +16,7 @@ Prisme est un agent autonome : chaque matin, sans personne, il lit l'actualité 
                             et archive le numéro en ligne
 ```
 
-Autour de l'envoi, d'autres circuits n8n servent les lecteurs : Inscription et Confirmation (double opt-in depuis le site), Désinscription en un clic, Votes (« Utile / Pas utile ») et Numéro en ligne (« Voir dans le navigateur »). Chaque jour à 15 h, Ménage efface les inscriptions jamais confirmées après 30 jours.
+Autour de l'envoi, d'autres circuits n8n servent les lecteurs : Inscription et Confirmation (double opt-in depuis le site), Désinscription en un clic, Votes (« Utile / Pas utile ») et Numéro en ligne (« Voir dans le navigateur »). Chaque jour à 15 h, Ménage efface les inscriptions jamais confirmées après 30 jours et les désinscrits dans les 24 heures, en ne gardant que le nombre de désinscriptions du jour.
 
 n8n est auto-hébergé sur un VPS Hostinger depuis la fin de l'essai n8n Cloud (octobre 2026) et les mails partent par Resend. Les liens publics passent par `prisme.krady.fr/api/...` (`worker.js`) : changer d'hébergeur pour n8n ne casse aucun lien.
 
