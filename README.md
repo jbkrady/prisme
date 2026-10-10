@@ -16,7 +16,7 @@ Prisme est un agent autonome : chaque matin, sans personne, il lit l'actualité 
                             et archive le numéro en ligne
 ```
 
-Autour de l'envoi, d'autres circuits n8n servent les lecteurs : Inscription et Confirmation (double opt-in depuis le site), Désinscription en un clic, Votes (« Utile / Pas utile ») et Numéro en ligne (« Voir dans le navigateur »).
+Autour de l'envoi, d'autres circuits n8n servent les lecteurs : Inscription et Confirmation (double opt-in depuis le site), Désinscription en un clic, Votes (« Utile / Pas utile ») et Numéro en ligne (« Voir dans le navigateur »). Chaque jour à 15 h, Ménage efface les inscriptions jamais confirmées après 30 jours.
 
 n8n est auto-hébergé sur un VPS Hostinger depuis la fin de l'essai n8n Cloud (octobre 2026) et les mails partent par Resend. Les liens publics passent par `prisme.krady.fr/api/...` (`worker.js`) : changer d'hébergeur pour n8n ne casse aucun lien.
 
@@ -47,7 +47,7 @@ La v2 répond à chaque constat : sources fixes collectées par n8n, fenêtre de
 |---|---|
 | `.claude/skills/grille-prisme/` | La méthode de l'agent. La routine la relit à chaque passage. |
 | `.claude/agents/prisme.md` | L'agent rédacteur, sans aucun outil. |
-| `n8n/` | L'export des 8 circuits, sans identifiants ni données, et le mode d'emploi pour les réinstaller. |
+| `n8n/` | L'export des 9 circuits, sans identifiants ni données, et le mode d'emploi pour les réinstaller. |
 | `site/` | La page d'inscription [prisme.krady.fr](https://prisme.krady.fr). |
 | `worker.js`, `wrangler.jsonc` | Le Worker Cloudflare qui sert le site et relaie `/api/*` vers n8n. |
 

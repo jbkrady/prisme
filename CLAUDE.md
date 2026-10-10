@@ -15,7 +15,7 @@ L'essentiel de l'IA pour les Product Managers, chaque matin à 8 h 30. Un agent 
 | 7 h 30 | Routine Claude « Prisme · édition du matin » | lit les candidats (connecteur n8n), les confie à l'agent `prisme` (skill `grille-prisme`), renvoie le JSON → n8n · Prisme · Réception → `prisme_editions` |
 | 8 h 30 | n8n · Prisme · Envoi | met en page (gabarit mail v2, nœud « Mettre en page »), envoie à chaque abonné actif de `prisme_abonnes`, archive la version en ligne dans `prisme_pages` |
 
-Autres circuits n8n : Inscription, Confirmation, Désinscription, Votes, Numéro en ligne (« Voir dans le navigateur »). Ils ont un filtre anti-robots : tester avec un user-agent de navigateur, pas un curl brut.
+Autres circuits n8n : Inscription, Confirmation, Désinscription, Votes, Numéro en ligne (« Voir dans le navigateur »), et Ménage (15 h : efface les inscriptions « en_attente » de plus de 30 jours, sans toucher aux actifs ni aux désinscrits). Les circuits publics ont un filtre anti-robots : tester avec un user-agent de navigateur, pas un curl brut.
 
 **Où tourne n8n.** L'essai n8n Cloud (`jbkrady.app.n8n.cloud`) a pris fin le 3 octobre 2026. n8n est auto-hébergé sur un VPS Hostinger KVM 2 (`n8n.krady.fr`, Docker, fuseau `Europe/Paris`, historique des exécutions purgé à 14 jours). Les liens publics (site, mails) passent par `prisme.krady.fr/api/<circuit>`, que le Worker relaie vers n8n : changer d'hébergeur, c'est changer une ligne de `worker.js`. La routine parle à n8n par le connecteur MCP de l'instance (`n8n.krady.fr/mcp-server/http`) ; ses identifiants de tableau et de circuit sont écrits dans son texte : les mettre à jour si on recrée un tableau ou un circuit.
 
@@ -32,7 +32,7 @@ Autres circuits n8n : Inscription, Confirmation, Désinscription, Votes, Numéro
 - `site/` : prisme.krady.fr (page d'inscription, `img/` pour Tri, `mail/` pour les images des mails, `apercu/` pour l'exemple de numéro). Design : projet Claude Design « Lancer la routine », fichiers « Prisme Site v2 » et « Prisme Mail ».
 - `design/mascotte/` : le kit de Tri (5 expressions, 1x et 2x).
 - **Visuels hors dépôt** (depuis le 10 octobre 2026) : `design/`, `site/img/`, `site/mail/`, `site/partage.*`, les icônes et les captures d'écran sont dans `.gitignore` et effacés de l'historique GitHub. Ils n'existent que sur le Mac de JB, avec une sauvegarde dans iCloud Drive › Prisme › visuels. Ne jamais les supprimer du Mac : le prochain `wrangler deploy` les retirerait du site et de tous les mails déjà envoyés. Un visuel ajouté ou modifié se recopie aussi dans la sauvegarde.
-- `n8n/` : l'export des 8 circuits (sauvegarde, base de réinstallation) et la liste des tables. Sans identifiants ni données.
+- `n8n/` : l'export des 9 circuits (sauvegarde, base de réinstallation) et la liste des tables. Sans identifiants ni données.
 - `worker.js` : sert `site/` et relaie `/api/*` vers les webhooks n8n (liste blanche des circuits publics).
 
 ## Publier

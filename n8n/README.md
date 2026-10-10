@@ -1,6 +1,6 @@
 # Les circuits n8n de Prisme
 
-Les 8 circuits de Prisme, exportés de n8n Cloud (`jbkrady.app.n8n.cloud`) à la fin de l'essai (3 octobre 2026), puis adaptés au n8n auto-hébergé (`n8n.krady.fr`, VPS Hostinger) : liens par `prisme.krady.fr/api/...`, envoi par Resend en SMTP, numérotation qui part du 8 octobre 2026 (N° 1).
+Les circuits de Prisme. Les 8 premiers ont été exportés de n8n Cloud (`jbkrady.app.n8n.cloud`) à la fin de l'essai (3 octobre 2026), puis adaptés au n8n auto-hébergé (`n8n.krady.fr`, VPS Hostinger) : liens par `prisme.krady.fr/api/...`, envoi par Resend en SMTP, numérotation qui part du 8 octobre 2026 (N° 1).
 
 | Fichier | Circuit | Déclencheur |
 |---|---|---|
@@ -12,6 +12,7 @@ Les 8 circuits de Prisme, exportés de n8n Cloud (`jbkrady.app.n8n.cloud`) à la
 | `desinscription.json` | Prisme · Désinscription | webhook `prisme-desinscription` |
 | `votes.json` | Prisme · Votes | webhook `prisme-vote` |
 | `numero-en-ligne.json` | Prisme · Numéro en ligne | webhook `prisme-numero` (« Voir dans le navigateur ») |
+| `menage.json` | Prisme · Ménage | 15 h, efface de `prisme_abonnes` les inscriptions `en_attente` de plus de 30 jours (ajouté le 11 octobre 2026, directement sur `n8n.krady.fr`) |
 
 ## Ce que l'export ne contient pas
 
