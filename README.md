@@ -12,11 +12,13 @@ Prisme est un agent autonome : chaque matin, sans personne, il lit l'actualité 
 7 h 30   Routine Claude     lit les candidats (connecteur n8n), les confie à l'agent prisme,
                             renvoie l'édition à n8n (connecteur n8n)
          n8n · Réception    vérifie l'édition et la met de côté
-8 h 30   n8n · Envoi        met en page avec le gabarit Prisme et envoie
-         n8n · Votes        reçoit les clics « Utile / Pas utile »
+8 h 30   n8n · Envoi        met en page avec le gabarit Prisme, envoie à chaque abonné
+                            et archive le numéro en ligne
 ```
 
-Les circuits n8n sont exportés dans [`n8n/`](n8n/). Depuis la fin de l'essai n8n Cloud (octobre 2026), n8n est auto-hébergé sur un VPS Hostinger et les mails partent par Resend ; les liens publics passent par `prisme.krady.fr/api/...` (`worker.js`), pour ne plus dépendre de l'adresse de n8n.
+Autour de l'envoi, d'autres circuits n8n servent les lecteurs : Inscription et Confirmation (double opt-in depuis le site), Désinscription en un clic, Votes (« Utile / Pas utile ») et Numéro en ligne (« Voir dans le navigateur »).
+
+n8n est auto-hébergé sur un VPS Hostinger depuis la fin de l'essai n8n Cloud (octobre 2026) et les mails partent par Resend. Les liens publics passent par `prisme.krady.fr/api/...` (`worker.js`) : changer d'hébergeur pour n8n ne casse aucun lien.
 
 ## Skill et agent : qui fait quoi
 
@@ -39,6 +41,18 @@ La v1 (« Lancer la routine », septembre 2026) cherchait elle-même sur le web.
 
 La v2 répond à chaque constat : sources fixes collectées par n8n, fenêtre de 48 h, mémoire des articles envoyés, gabarit de mail imposé par n8n et non par l'IA.
 
+## Le dépôt
+
+| Dossier ou fichier | Contenu |
+|---|---|
+| `.claude/skills/grille-prisme/` | La méthode de l'agent. La routine la relit à chaque passage. |
+| `.claude/agents/prisme.md` | L'agent rédacteur, sans aucun outil. |
+| `n8n/` | L'export des 8 circuits, sans identifiants ni données, et le mode d'emploi pour les réinstaller. |
+| `site/` | La page d'inscription [prisme.krady.fr](https://prisme.krady.fr). |
+| `worker.js`, `wrangler.jsonc` | Le Worker Cloudflare qui sert le site et relaie `/api/*` vers n8n. |
+
+Les visuels (la mascotte Tri, les images du site et des mails, les icônes) ne sont pas dans le dépôt : une copie de `site/` ne suffit pas à reconstruire le site à l'identique.
+
 ## Licence
 
-Le code est sous licence MIT. Le nom Prisme, la mascotte Tri et les visuels (mascotte, images du site et des mails, carte de partage, icônes) restent la propriété de Jean-Baptiste Krady, tous droits réservés : ils ne sont pas publiés dans ce dépôt (voir [`LICENSE-VISUELS`](LICENSE-VISUELS)).
+Le code est sous licence MIT (voir [`LICENSE`](LICENSE)). Le nom Prisme et la mascotte Tri n'en font pas partie : tous droits réservés.
