@@ -4,3 +4,15 @@
 Capture d’écran*.png
 .playwright-mcp/
 ????????-????-????-????-????????????.png
+
+# Visuels de Prisme (Tri, images des mails, carte de partage, icônes) : tous droits réservés,
+# hors du dépôt public. Ils restent dans site/ et design/ sur le Mac de JB (wrangler deploy les publie)
+# et sont sauvegardés dans iCloud Drive › Prisme › visuels.
+design/
+site/img/
+site/mail/
+site/partage.*
+site/favicon*
+site/apple-touch-icon.png
+site/icon-192.png
+site/exemple-mail.png

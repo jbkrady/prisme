@@ -31,6 +31,7 @@ Autres circuits n8n : Inscription, Confirmation, Désinscription, Votes, Numéro
 - `.claude/agents/prisme.md` : le rédacteur, sans aucun outil (il lit du contenu web : chacun n'a que les droits de son rôle).
 - `site/` : prisme.krady.fr (page d'inscription, `img/` pour Tri, `mail/` pour les images des mails, `apercu/` pour l'exemple de numéro). Design : projet Claude Design « Lancer la routine », fichiers « Prisme Site v2 » et « Prisme Mail ».
 - `design/mascotte/` : le kit de Tri (5 expressions, 1x et 2x).
+- **Visuels hors dépôt** (depuis le 10 octobre 2026) : `design/`, `site/img/`, `site/mail/`, `site/partage.*` et les icônes sont dans `.gitignore` et effacés de l'historique GitHub. Ils n'existent que sur le Mac de JB, avec une sauvegarde dans iCloud Drive › Prisme › visuels. Ne jamais les supprimer du Mac : le prochain `wrangler deploy` les retirerait du site et de tous les mails déjà envoyés. Un visuel ajouté ou modifié se recopie aussi dans la sauvegarde.
 - `n8n/` : l'export des 8 circuits (sauvegarde, base de réinstallation) et la liste des tables. Sans identifiants ni données.
 - `worker.js` : sert `site/` et relaie `/api/*` vers les webhooks n8n (liste blanche des circuits publics).
 
@@ -38,7 +39,7 @@ Autres circuits n8n : Inscription, Confirmation, Désinscription, Votes, Numéro
 
 - Site : `npx wrangler deploy` depuis ce dossier (Worker Cloudflare `prisme`, domaine prisme.krady.fr, pas d'adresse workers.dev).
 - Le gabarit du mail vit dans n8n (nœud « Mettre en page » de Prisme · Envoi) : le modifier là, puis republier le circuit, puis réexporter dans `n8n/`.
-- Depuis une session Claude Code dans le cloud, `wrangler deploy` ne peut publier que `worker.js` : l'envoi des fichiers de `site/` y est refusé. Un changement de `site/` se publie depuis le Mac.
+- Depuis une session Claude Code dans le cloud, `wrangler deploy` ne peut publier que `worker.js` : l'envoi des fichiers de `site/` y est refusé. Un changement de `site/` se publie depuis le Mac. Ne jamais publier le site depuis une copie GitHub du dépôt : elle n'a pas les visuels.
 
 ## Règles
 

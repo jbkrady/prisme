@@ -3,15 +3,13 @@ Prisme · licence des visuels
 La licence MIT (fichier LICENSE) couvre seulement le code de ce dépôt.
 
 Le nom Prisme, la mascotte Tri et les visuels n'en font pas partie :
-design/, site/img/, site/mail/, site/partage.*, ainsi que les icônes du site
-(favicon, apple-touch-icon, icon-192).
-Tous droits réservés, Jean-Baptiste Krady.
+mascotte, images du site et des mails, carte de partage, icônes du site.
+Ils ne sont pas publiés dans ce dépôt. Tous droits réservés, Jean-Baptiste Krady.
 
 ---
 
 The MIT License (LICENSE file) covers the code of this repository only.
 
 The Prisme name, the Tri mascot and the visual assets are not licensed
-under it: design/, site/img/, site/mail/, site/partage.*, and the site icons
-(favicon, apple-touch-icon, icon-192).
-All rights reserved, Jean-Baptiste Krady.
+under it: mascot, site and email images, share card, site icons.
+They are not published in this repository. All rights reserved, Jean-Baptiste Krady.
