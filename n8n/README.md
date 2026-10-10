@@ -17,7 +17,6 @@ Les 8 circuits de Prisme, exportés de n8n Cloud (`jbkrady.app.n8n.cloud`) à la
 
 - **Les identifiants** : l'identifiant SMTP « Prisme Resend » se crée sur l'instance (clé Resend, jamais dans le dépôt). Sur n8n.krady.fr, il s'appelle « SMTP account » : seul son identifiant compte.
 - **Les données** : les 6 data tables sont à recréer (colonnes ci-dessous). Les abonnés ne passent jamais par ce dépôt.
-- **L'adresse de JB** : remplacée par `ADRESSE_DE_JB` (destinataire de « Prévenir : pas d'édition », adresse de réponse des mails aux abonnés).
 
 | Table | Colonnes (texte sauf mention) |
 |---|---|
@@ -32,8 +31,7 @@ Les 8 circuits de Prisme, exportés de n8n Cloud (`jbkrady.app.n8n.cloud`) à la
 
 1. Les identifiants de tables (`dataTableId`) : remplacer par ceux de la nouvelle instance.
 2. Les 4 nœuds d'envoi (« Send Email ») : choisir l'identifiant SMTP « Prisme Resend ».
-3. `ADRESSE_DE_JB` : remettre la vraie adresse, sur l'instance seulement.
-4. Rendre « Prisme · Réception » disponible en MCP, puis mettre à jour dans le texte de la routine les identifiants du tableau `prisme_candidats`, du projet et du circuit Réception.
+3. Rendre « Prisme · Réception » disponible en MCP, puis mettre à jour dans le texte de la routine les identifiants du tableau `prisme_candidats`, du projet et du circuit Réception.
 
 Les adresses publiques ne changent plus : elles passent toutes par `prisme.krady.fr/api/...` et `worker.js` relaie vers n8n.
 
