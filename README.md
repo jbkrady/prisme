@@ -9,7 +9,7 @@ Prisme est un agent autonome : chaque matin, sans personne, il lit l'actualité 
 ```
 6 h 00   n8n · Collecte     lit les flux de 14 sources, garde les 48 dernières heures,
                             écarte le déjà envoyé, range les candidats dans un tableau
-7 h 30   Routine Claude     lit les candidats (connecteur n8n), les confie à l'agent prisme,
+7 h 50   Routine Claude     lit les candidats (connecteur n8n), les confie à l'agent prisme,
                             renvoie l'édition à n8n (connecteur n8n)
          n8n · Réception    vérifie l'édition et la met de côté
 8 h 30   n8n · Envoi        met en page avec le gabarit Prisme, envoie à chaque abonné
